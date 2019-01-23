@@ -13,7 +13,7 @@ services:
   blogbibliosistemas:
     image: wordpress
     labels:
-      - "traefik.frontend.rule=Host:lab.draphp.com"
+      - "traefik.frontend.rule=Host:lab.draphp.com" #conecta traefic con el wordpress
     volumes:
       - ./html:/var/www/html
     environment:
@@ -26,13 +26,13 @@ services:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
     ports:
-      - 33006:3306
+      - 33006:3306 # expone el puerto  33006 afuera del contenedor
 
     environment:
       MYSQL_DATABASE: blog
       MYSQL_USER: blog
       MYSQL_PASSWORD: myache
-      MYSQL_ROOT_PASSWORD: 'ache72'
+      MYSQL_ROOT_PASSWORD: 'mapache'
     volumes:
-      - /datos/mydata:/var/lib/mysql
-      - ./blog.sql.gz:/docker-entrypoint-initdb.d/backup.sql.gz
+      - /datos/mydata:/var/lib/mysql # crea un volumen que permite no perder los datos en los reinicios.
+      - ./blog.sql.gz:/docker-entrypoint-initdb.d/backup.sql.gz #importa los datos al mysql desde un backup anterior del wordpress
