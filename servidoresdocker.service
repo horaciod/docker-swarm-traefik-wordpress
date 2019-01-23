@@ -1,0 +1,15 @@
+[Unit]
+Description=servidoresdocker swarm
+
+[Service]
+WorkingDirectory=/datos/webs/bibliosistemas.blog/
+ExecStart=/bin/sh  start.sh
+ExecStop=/bin/sh  stop.sh
+User=desarrollo
+Group=desarrollo
+Type=forking
+Restart=on-abnormal
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
